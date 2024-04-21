@@ -1,9 +1,9 @@
 import axios from "axios";
 import { CART_ADD_ITEM, CART_REMOVE_ITEM , CART_SAVE_PAYMENT_METHOD, CART_SAVE_SHIPPING_ADDRESS } from "../constants/cartConstants";
 
-// const server_URL = "https://amazona-backend-mfc1.onrender.com"
+const server_URL = "https://amazona-backend-mfc1.onrender.com"
 export const addToCart=(id,qty)=> async (dispatch , getState)=>{
-    const {data} = await axios.get(`/api/products/${id}`)
+    const {data} = await axios.get(`${server_URL}/api/products/${id}`)
     console.log(data ,'data');
     dispatch({
         type:CART_ADD_ITEM,

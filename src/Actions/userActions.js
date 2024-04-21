@@ -27,6 +27,7 @@ import {
   USER_UPDATE_FAIL,
 } from "../constants/userConstants";
 import { ORDER_LIST_MY_RESET } from "../constants/orderConstants";
+const server_URL = "https://amazona-backend-mfc1.onrender.com"
 
 export const login = (email, password) => async (dispatch) => {
   try {
@@ -39,7 +40,7 @@ export const login = (email, password) => async (dispatch) => {
       },
     };
     const { data } = await axios.post(
-      "/api/users/login",
+      `${server_URL}/api/users/login`,
       { email, password },
       config
     );
@@ -70,7 +71,7 @@ export const register = (name, email, password) => async (dispatch) => {
       },
     };
     const { data } = await axios.post(
-      "/api/users",
+      `${server_URL}/api/users`,
       { name, email, password },
       config
     );
@@ -108,7 +109,7 @@ export const getUserDetails = (profile) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`/api/users/${profile}`, config);
+    const { data } = await axios.get(`${server_URL}/api/users/${profile}`, config);
 
     dispatch({
       type: USER_DETAILS_SUCCESS,
@@ -139,7 +140,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    const { data } = await axios.put(`/api/users/profile`, user, config);
+    const { data } = await axios.put(`${server_URL}/api/users/profile`, user, config);
     dispatch({
       type: USER_UPDATE_PROFILE_SUCCESS,
       payload: data,
@@ -167,7 +168,7 @@ export const listUsers = () => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    const { data } = await axios.get("/api/users", config);
+    const { data } = await axios.get(`${server_URL}/api/users`, config);
     dispatch({ type: USER_LIST_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
@@ -194,7 +195,7 @@ export const deleteUser = (id) => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    const { data } = await axios.delete(`/api/users/${id}`, config);
+    const { data } = await axios.delete(`${server_URL}/api/users/${id}`, config);
 
     dispatch({ type: USER_DELETE_SUCCESS, payload: data });
   } catch (error) {
@@ -231,7 +232,7 @@ export const updateUser = (user) => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    const { data } = await axios.put(`/api/users/${user._id}`, user, config);
+    const { data } = await axios.put(`${server_URL}/api/users/${user._id}`, user, config);
     dispatch({ type: USER_UPDATE_SUCCESS });
     dispatch({ type: USER_DETAILS_SUCCESS, payload: data });
     dispatch({ type: USER_DETAILS_RESET });

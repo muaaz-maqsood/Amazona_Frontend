@@ -23,6 +23,7 @@ import {
   ORDER_DELIVER_RESET,
 } from "../constants/orderConstants";
 
+const server_URL = "https://amazona-backend-mfc1.onrender.com";
 export const createOrder = (order) => async (dispatch, getState) => {
   try {
     dispatch({
@@ -40,7 +41,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.post(`/api/orders`, order, config);
+    const { data } = await axios.post(`${server_URL}/api/orders`, order, config);
 
     dispatch({
       type: ORDER_CREATE_SUCCESS,
@@ -75,7 +76,7 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`/api/orders/${id}`, config);
+    const { data } = await axios.get(`${server_URL}/api/orders/${id}`, config);
 
     dispatch({
       type: ORDER_DETAILS_SUCCESS,
@@ -108,7 +109,7 @@ export const listMyOrders = () => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    const { data } = await axios.get(`/api/orders/myorders`, config);
+    const { data } = await axios.get(`${server_URL}/api/orders/myorders`, config);
 
     dispatch({
       type: ORDER_LIST_MY_SUCCESS,
@@ -141,7 +142,7 @@ export const payOrder =
         },
       };
       const { data } = await axios.put(
-        `/api/orders/${orderId}/pay`,
+        `${server_URL}/api/orders/${orderId}/pay`,
         paymentResult,
         config
       );
@@ -174,7 +175,7 @@ export const deliverOrder = (order) => async (dispatch, getState) => {
       },
     };
     const { data } = await axios.put(
-      `/api/orders/${order._id}/deliver`,
+      `${server_URL}/api/orders/${order._id}/deliver`,
       {},
       config
     );
@@ -206,7 +207,7 @@ export const listOrders = () => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    const { data } = await axios.get(`/api/orders`, config);
+    const { data } = await axios.get(`${server_URL}/api/orders`, config);
     dispatch({
       type: ORDER_LIST_SUCCESS,
       payload: data,
