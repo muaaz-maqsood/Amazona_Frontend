@@ -23,7 +23,7 @@ function Header() {
           <Container>
             <LinkContainer to="/">
               <Nav.Link>
-                <Navbar.Brand>Vvork-Tech-Store</Navbar.Brand>
+                <Navbar.Brand>Amazona-Store</Navbar.Brand>
               </Nav.Link>
             </LinkContainer>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
